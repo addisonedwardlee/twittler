@@ -1,20 +1,26 @@
-    header {
-      text-align: center;
-      background: url("http://dash.ga.co/assets/jeff-bg.png");
-      background-size: cover;
-      color: white;
-    }
-    a {
-      color: white;
-    }
-    h1 {
-      font-size: 70px;
-	}
-    ul {
-      padding: 10px;
-      background: black;
-    }
-    li {
-      display: inline;
-      padding: 0px 10px 0px 10px;
-    }
+body {
+	color: white;
+	background: black;
+}
+header {
+  text-align: center;
+  background: url("http://www.rheababla.co.uk/wp-content/uploads/2013/02/header.jpg");
+  background-size: cover;
+  color: white;
+}
+article{
+	text-align: center;
+}
+a {
+  color: white;
+}
+h1 {
+  font-size: 70px;
+}
+ul {
+  padding: 10px;
+}
+li {
+  display: inline;
+  padding: 0px 10px 0px 10px;
+}
