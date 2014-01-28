@@ -8,14 +8,9 @@ header {
   background-size: cover;
   color: white;
 }
-article{
-	text-align: center;
-}
-a {
-  color: white;
-}
 h1 {
   font-size: 70px;
+  margin: 0 auto;
 }
 ul {
   padding: 10px;
@@ -23,4 +18,13 @@ ul {
 li {
   display: inline;
   padding: 0px 10px 0px 10px;
+}
+a {
+  color: white;
+}
+article {
+	text-align: center;
+}
+input[type='tweet'] {
+	border: 0;
 }

@@ -11,8 +11,11 @@
   <body>
     <header>
       <h1>Twittler</h1>
+      <input type="tweet" size="35" placeholder="Enter a new tweet here!">
+      <input type="submit" value="Tweet!">
       <ul>
         <li><a class='filters' data-user='home' href="#">Home</a></li>
+        <li><a class='filters' data-user='myTweets' href="#">My Tweets</a></li>
         <li><a class='filters' data-user='shawndrost' href="#">Shawn Drost</a></li>
         <li><a class='filters' data-user='sharksforcheap' href="#">Sharks For Cheap</a></li>
         <li><a class='filters' data-user='mracus' href="#">MRacus</a></li>
@@ -24,25 +27,36 @@
     <script>
       $(document).ready(function(){
         var $article = $('article');
+        var timeoutID = null;
+        //timeoutID question: how is it that the showTweets function can set timeoutID
+        //inside a local environment, yet it can be accessed later by the
+        //.filters.on('click') function?
 
         var showTweets = function(userName) {
-        	$article.html('');
-	        var index = streams.home.length - 1;
-	        while(index >= 0){
-	          var tweet = streams.home[index];
-	          var $tweet = $('<div></div>');
-	          var tweetTime = moment(tweet.created_at).fromNow();
-	          $tweet.text('@' + tweet.user + ': ' + tweet.message + ": tweeted " + tweetTime);
-	          $tweet.appendTo($article);
-	          index -= 1;
-	        };
-    			setTimeout(showTweets, 5000);
-    		};
+          $article.html('');
+          var userNameShort;
+          if (userName === 'home') {
+            userNameShort = streams.home;
+          } else {
+            userNameShort = streams.users[userName];
+          };
+          var index = userNameShort.length - 1;
+          while(index >= 0){
+            var tweet = userNameShort[index];
+            var $tweet = $('<div></div>');
+            var tweetTime = moment(tweet.created_at).fromNow();
+            $tweet.text('@' + tweet.user + ': ' + tweet.message + ": tweeted " + tweetTime);
+            $tweet.appendTo($article);
+            index -= 1;
+          };
+          timeoutID = setTimeout(showTweets, 5000, userName);
+        };
 
-		    showTweets();
+		    showTweets('home');
 
         $('.filters').on('click', function() {
-          alert("you clicked on " + this.getAttribute("data-user"))
+          clearTimeout(timeoutID);
+          showTweets(this.getAttribute("data-user"))
         });
 
       });
