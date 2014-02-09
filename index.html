@@ -28,9 +28,6 @@
       $(document).ready(function(){
         var $article = $('article');
         var timeoutID = null;
-        //timeoutID question: how is it that the showTweets function can set timeoutID
-        //inside a local environment, yet it can be accessed later by the
-        //.filters.on('click') function?
 
         var showTweets = function(userName) {
           $article.html('');
@@ -45,7 +42,7 @@
             var tweet = userNameShort[index];
             var $tweet = $('<div></div>');
             var tweetTime = moment(tweet.created_at).fromNow();
-            $tweet.text('@' + tweet.user + ': ' + tweet.message + ": tweeted " + tweetTime);
+            $tweet.html('@' + '<a class ="filters" href="#" data-user=' + tweet.user + '>' + tweet.user + '</a>' + ': ' + tweet.message + ": tweeted " + tweetTime);
             $tweet.appendTo($article);
             index -= 1;
           };
@@ -58,7 +55,7 @@
           clearTimeout(timeoutID);
           showTweets(this.getAttribute("data-user"))
         });
-
+        
       });
     </script>
   </body>
